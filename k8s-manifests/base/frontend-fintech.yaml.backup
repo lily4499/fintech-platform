@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-fintech
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend-fintech
+  template:
+    metadata:
+      labels:
+        app: frontend-fintech
+    spec:
+      containers:
+      - name: frontend-fintech
+        image: laly9999/fintech-frontend:v1.0
+        ports:
+        - containerPort: 80
+        env:
+        - name: REACT_APP_BACKEND_URL
+          valueFrom:
+            configMapKeyRef:
+              name: frontend-config
+              key: REACT_APP_BACKEND_URL
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-fintech
+spec:
+  selector:
+    app: frontend-fintech
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: LoadBalancer
+

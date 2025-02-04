@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-fintech
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-fintech
+  template:
+    metadata:
+      labels:
+        app: backend-fintech
+    spec:
+      containers:
+      - name: backend-fintech
+        image: laly9999/fintech-backend:v1.0
+        ports:
+        - containerPort: 5000
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: MONGO_URI
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: MONGO_URI
+        - name: CLIENT_URL
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: CLIENT_URL
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-fintech
+spec:
+  selector:
+    app: backend-fintech
+  ports:
+  - protocol: TCP
+    port: 5000
+    targetPort: 5000
+  type: ClusterIP
+

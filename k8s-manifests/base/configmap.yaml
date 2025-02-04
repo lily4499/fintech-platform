@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fintech-config
+data:
+
+  REACT_APP_BACKEND_URL: "https://fintech-backend.lilianedevops.online/api"
+  CLIENT_URL: "https://fintech-frontend.lilianedevops.online"
