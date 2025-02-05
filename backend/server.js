@@ -25,7 +25,7 @@ mongoose.connect(process.env.MONGO_URI)
 app.get("/", (req, res) => res.json({ message: "Fintech API Running 🚀" }));
 
 // Route to return JSON
-app.get("/api", (req, res) => res.json({ message: "Hello from Fintech API !!!" }));
+app.get("/api", (req, res) => res.json({ message: "Hello from Fintech API !!!  🚀 New Version Deployed via GitOps!" }));
 
 // Route to return plain text
 // app.get("/", (req, res) => {
