@@ -20,8 +20,8 @@ spec:
         env:
         - name: REACT_APP_BACKEND_URL
           valueFrom:
-            configMapKeyRef:
-              name: fintech-config
+            secretKeyRef:
+              name: backend-secret
               key: REACT_APP_BACKEND_URL
 ---
 apiVersion: v1
